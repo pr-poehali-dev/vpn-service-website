@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureVPN - Защитите свою приватность</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #00D4FF;
+            --secondary-color: #507A91;
+            --accent-color: #E5F9FF;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: #00B8E6;
+            border-color: #00B8E6;
+        }
+        
+        .text-primary {
+            color: var(--primary-color) !important;
+        }
+        
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+        }
+        
+        .brand-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-color) 100%);
+            min-height: 100vh;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            line-height: 1.1;
+        }
+        
+        .hero-img {
+            max-width: 300px;
+            height: auto;
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .pricing-card {
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .pricing-card.popular {
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .popular-badge .badge {
+            background: var(--primary-color) !important;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+        
+        .price-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .price-period {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+        
+        .cta {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        }
+        
+        .footer {
+            background: #1a1a1a !important;
+        }
+        
+        /* Анимации */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            animation: scaleIn 0.6s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        /* Задержки анимации */
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        
+        .scale-in:nth-child(1) { animation-delay: 0.1s; }
+        .scale-in:nth-child(2) { animation-delay: 0.2s; }
+        .scale-in:nth-child(3) { animation-delay: 0.3s; }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .pricing-card.popular {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <div class="brand-icon me-2">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+                <span class="brand-text">SecureVPN</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto me-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Возможности</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Тарифы</a>
+                    </li>
+                </ul>
+                <button class="btn btn-outline-primary">Войти</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero d-flex align-items-center">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-12">
+                    <h1 class="hero-title fw-bold mb-4 fade-in">
+                        Защитите свою
+                        <span class="text-primary d-block">приватность</span>
+                    </h1>
+                    <p class="lead mb-5 fade-in">
+                        Быстрый и безопасный VPN с серверами в 30+ странах.<br>
+                        Без логирования, без автоплатежей, полная свобода в интернете.
+                    </p>
+                    <div class="mb-5 scale-in">
+                        <button class="btn btn-primary btn-lg me-3 mb-3" onclick="startTrial()">
+                            Попробовать бесплатно
+                            <i class="bi bi-arrow-right ms-2"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary btn-lg mb-3" onclick="showDemo()">
+                            <i class="bi bi-play-fill me-2"></i>
+                            Смотреть демо
+                        </button>
+                    </div>
+                    <div class="scale-in">
+                        <img src="img/a04ce7e1-7e3e-4904-a58f-229e37a29526.jpg" alt="VPN Security" class="hero-img img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5 bg-white">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-4 fw-bold mb-4">Почему выбирают нас</h2>
+                    <p class="lead text-muted">
+                        Мы создали VPN-сервис, который действительно защищает вашу приватность
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card text-center p-4 h-100 fade-in">
+                        <div class="feature-icon mb-3">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h5 class="fw-bold mb-3">Максимальная безопасность</h5>
+                        <p class="text-muted">Военное шифрование AES-256 для полной защиты ваших данных</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card text-center p-4 h-100 fade-in">
+                        <div class="feature-icon mb-3">
+                            <i class="bi bi-globe"></i>
+                        </div>
+                        <h5 class="fw-bold mb-3">30+ локаций</h5>
+                        <p class="text-muted">Серверы по всему миру для быстрого и стабильного подключения</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card text-center p-4 h-100 fade-in">
+                        <div class="feature-icon mb-3">
+                            <i class="bi bi-lightning-charge"></i>
+                        </div>
+                        <h5 class="fw-bold mb-3">Высокая скорость</h5>
+                        <p class="text-muted">Без ограничений скорости и объема трафика</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card text-center p-4 h-100 fade-in">
+                        <div class="feature-icon mb-3">
+                            <i class="bi bi-credit-card-2-front"></i>
+                        </div>
+                        <h5 class="fw-bold mb-3">Без автоплатежей</h5>
+                        <p class="text-muted">Полный контроль подписки, платите только когда хотите</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-5 bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-4 fw-bold mb-4">Выберите ваш тариф</h2>
+                    <p class="lead text-muted">
+                        Прозрачные цены без скрытых платежей. Отменить можно в любой момент.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row g-4 justify-content-center">
+                <!-- 1 месяц -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card card h-100 scale-in">
+                        <div class="card-body text-center p-4">
+                            <h4 class="card-title fw-bold mb-3">1 месяц</h4>
+                            <div class="mb-4">
+                                <span class="price-amount">299₽</span>
+                                <span class="price-period">/месяц</span>
+                            </div>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Более 30 локаций</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Безлимитный трафик</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Без автоплатежей</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Kill Switch</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Поддержка 24/7</li>
+                            </ul>
+                            <button class="btn btn-outline-primary btn-lg w-100" onclick="selectPlan('1month')">Выбрать тариф</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 3 месяца -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card card h-100 popular scale-in">
+                        <div class="popular-badge">
+                            <span class="badge bg-primary">Популярный</span>
+                        </div>
+                        <div class="card-body text-center p-4">
+                            <h4 class="card-title fw-bold mb-3">3 месяца</h4>
+                            <div class="mb-4">
+                                <span class="price-amount">199₽</span>
+                                <span class="price-period">/месяц</span>
+                                <div class="mt-1">
+                                    <small class="text-muted text-decoration-line-through">299₽</small>
+                                </div>
+                            </div>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Более 30 локаций</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Безлимитный трафик</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Без автоплатежей</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Kill Switch</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Поддержка 24/7</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Экономия 33%</strong></li>
+                            </ul>
+                            <button class="btn btn-primary btn-lg w-100" onclick="selectPlan('3months')">Выбрать тариф</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 1 год -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card card h-100 scale-in">
+                        <div class="card-body text-center p-4">
+                            <h4 class="card-title fw-bold mb-3">1 год</h4>
+                            <div class="mb-4">
+                                <span class="price-amount">99₽</span>
+                                <span class="price-period">/месяц</span>
+                                <div class="mt-1">
+                                    <small class="text-muted text-decoration-line-through">299₽</small>
+                                </div>
+                            </div>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Более 30 локаций</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Безлимитный трафик</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Без автоплатежей</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Kill Switch</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Поддержка 24/7</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Экономия 67%</strong></li>
+                            </ul>
+                            <button class="btn btn-outline-primary btn-lg w-100" onclick="selectPlan('12months')">Выбрать тариф</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta py-5 text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-4 fw-bold mb-4">
+                        Начните защищать свою приватность уже сегодня
+                    </h2>
+                    <p class="lead mb-4">
+                        Присоединяйтесь к тысячам пользователей, которые доверяют нам свою безопасность в интернете
+                    </p>
+                    <button class="btn btn-primary btn-lg" onclick="startTrial()">
+                        Получить 7 дней бесплатно
+                        <i class="bi bi-arrow-right ms-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer text-white py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="brand-icon me-2">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <span class="brand-text text-white">SecureVPN</span>
+                    </div>
+                    <p class="text-muted">
+                        Безопасный и быстрый VPN для защиты вашей приватности в интернете.
+                    </p>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold mb-3">Продукт</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Возможности</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Тарифы</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Приложения</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold mb-3">Поддержка</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Помощь</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Контакты</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold mb-3">Компания</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">О нас</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Политика конфиденциальности</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Условия использования</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            
+            <div class="text-center">
+                <p class="text-muted mb-0">&copy; 2024 SecureVPN. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Функция для начала пробного периода
+        function startTrial() {
+            alert('Начинаем 7-дневный пробный период! Вы будете перенаправлены на страницу регистрации.');
+            // Здесь можно добавить реальную логику регистрации
+        }
+        
+        // Функция для показа демо
+        function showDemo() {
+            alert('Демо-видео будет показано в отдельном окне.');
+            // Здесь можно добавить модальное окно с видео
+        }
+        
+        // Функция выбора тарифного плана
+        function selectPlan(planId) {
+            const plans = {
+                '1month': 'Тариф: 1 месяц за 299₽/месяц',
+                '3months': 'Тариф: 3 месяца за 199₽/месяц (популярный)',
+                '12months': 'Тариф: 1 год за 99₽/месяц'
+            };
+            
+            alert(`Вы выбрали: ${plans[planId]}\nПереходим к оформлению заказа...`);
+            // Здесь можно добавить логику оформления заказа
+        }
+        
+        // Плавная прокрутка для якорных ссылок
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Анимация появления элементов при прокрутке
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+        
+        // Наблюдаем за элементами с анимацией
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.fade-in, .scale-in');
+            animatedElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+        });
+        
+        // Добавляем эффект hover для карточек тарифов
+        document.querySelectorAll('.pricing-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                if (this.classList.contains('popular')) {
+                    this.style.transform = 'scale(1.05)';
+                } else {
+                    this.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
